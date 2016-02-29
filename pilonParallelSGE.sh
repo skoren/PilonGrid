@@ -80,8 +80,6 @@ len=`echo $line |awk '{print $NF}'`
 
 if [ -e "$utg.pilon.vcf" ]; then
    echo "Already done"
-elif [ -e "/cluster/ifs/users/korens/projects/goat/pilonFinished/$utg.pilon.vcf" ]; then
-   echo "Already done and moved"
 else
    BAMLIST=""
    # first we need to subset bam
