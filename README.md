@@ -17,3 +17,7 @@ sh pilon.sh asm.fasta
 ```
 
 The pipeline is very rough and has undergone limited testing so user beware.
+
+### CITE
+If you find this pipeline useful, please cite the original Pilon paper:<br>
+Walker BJ et. al. [Pilon: an integrated tool for comprehensive microbial variant detection and genome assembly improvement.](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0112963). PLoS One, 2014.
