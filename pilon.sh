@@ -63,7 +63,7 @@ if [ "$arch" = "Power Macintosh" ] ; then
   arch="ppc"
 fi
 
-if [ x$ASM == x"" ]; then
+if [ x$ASM == "x" ]; then
    echo "Error: you must specify an assembly fasta file"
    exit
 fi
@@ -92,6 +92,6 @@ echo "$LEN" > lens
 echo "$SCRIPT_PATH" > scripts
 
 echo "Running with $PREFIX $ASM $NUM_MAP mappings on $NUM_CTG contigs"
-qsub -V -q low.q -pe make-dedicated 1 -l mem_free=10g -cwd -N "${PREFIX}index" -j y -o `pwd`/index.out $SCRIPT_PATH/index.sh
-qsub -V -q low.q -pe make-dedicated 16 -l mem_free=1g -t 1-$NUM_MAP -cwd -N "${PREFIX}map" -hold_jid "${PREFIX}index" -j y -o `pwd`/\$TASK_ID.map.out $SCRIPT_PATH/map.sh 
-qsub -V -q low.q -pe make-dedicated 1 -tc 400  -l mem_free=60G -t 1-$NUM_CTG -cwd -N "${PREFIX}pilon" -hold_jid "${PREFIX}map" -j y -o `pwd`/\$TASK_ID.out $SCRIPT_PATH/pilonParallelSGE.sh
+qsub -V -pe thread 1 -l mem_free=10g -cwd -N "${PREFIX}index" -j y -o `pwd`/index.out $SCRIPT_PATH/index.sh
+qsub -V -pe thread 16 -l mem_free=1g -t 1-$NUM_MAP -cwd -N "${PREFIX}map" -hold_jid "${PREFIX}index" -j y -o `pwd`/\$TASK_ID.map.out $SCRIPT_PATH/map.sh 
+qsub -V -pe thread 1 -tc 400  -l mem_free=60G -t 1-$NUM_CTG -cwd -N "${PREFIX}pilon" -hold_jid "${PREFIX}map" -j y -o `pwd`/\$TASK_ID.out $SCRIPT_PATH/pilonParallelSGE.sh

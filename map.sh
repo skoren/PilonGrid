@@ -20,7 +20,8 @@
 #  Please cite the authors in any work or product based on this material.
 ######################################################################
 
-ASM=`cat asm |sed s/.fasta//g`
+ASM=`cat asm`
+PREFIX=`cat prefix`
 
 jobid=$SGE_TASK_ID
 if [ x$jobid = x -o x$jobid = xundefined -o x$jobid = x0 ]; then
@@ -53,12 +54,12 @@ if [ ! -e $file2 ]; then
 fi
 
 prefix=`basename $file1`
-prefix=`echo $prefix | awk -F "_R1_" '{print $1"_"$2}'|sed s/.fastq.gz//g`
+prefix=`echo $prefix | awk -F "_R1_" '{print $1"_"$2}'|sed s/.fastq.gz//g |sed s/.fastq//g |sed s/.fq.gz//g |sed s/.fq//g`
 
-echo "bwa mem -t 16 $ASM.fasta  $file1 $file2 2> $jobid.err  |samtools view -S -b - > $ASM.$prefix.unsorted.bam"
-echo "samtools sort $ASM.$prefix.unsorted.bam $ASM.$prefix.sorted"
-echo "samtools index $ASM.$prefix.sorted.bam"
-bwa mem -t 16 $ASM.fasta  $file1 $file2 2> $jobid.err  |samtools view -S -b - > $ASM.$prefix.unsorted.bam
-samtools sort $ASM.$prefix.unsorted.bam $ASM.$prefix.sorted
-samtools index $ASM.$prefix.sorted.bam
+echo "bwa mem -t 16 $ASM  $file1 $file2 2> $jobid.err  |samtools view -S -b - > $PREFIX.$prefix.unsorted.bam"
+echo "samtools sort $PREFIX.$prefix.unsorted.bam -o $PREFIX.$prefix.sorted.bam"
+echo "samtools index $PREFIX.$prefix.sorted.bam"
+bwa mem -t 16 $ASM  $file1 $file2 2> $jobid.err  |samtools view -S -b - > $PREFIX.$prefix.unsorted.bam
+samtools sort $PREFIX.$prefix.unsorted.bam -o $PREFIX.$prefix.sorted.bam
+samtools index $PREFIX.$prefix.sorted.bam
 
