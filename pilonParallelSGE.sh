@@ -74,7 +74,7 @@ else
       BAMLIST="$BAMLIST --frags $outputName.bam"
    done
    echo "$utg 0 $len" > $utg.$jobid.cut
-   java -Xmx60g SubFasta $utg.$jobid.cut $ASM > $utg.$jobid.fasta
+   java -Xmx60g -cp $SCRIPT_PATH:. SubFasta $utg.$jobid.cut $ASM > $utg.$jobid.fasta
 
    java -Xmx60g -jar $SCRIPT_PATH/pilon.jar --fix bases --genome $utg.$jobid.fasta $BAMLIST --output $utg.pilon --changes --vcf --diploid
 

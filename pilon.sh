@@ -73,7 +73,7 @@ if [ ! -e $ASM ]; then
    exit
 fi
 if [ ! -e $LEN ]; then
-   java SizeFasta $ASM > $LEN
+   java -cp $SCRIPT_PATH:. SizeFasta $ASM > $LEN
 fi
 NUM_CTG=`wc -l $LEN |awk '{print $1}'`
 if [ $NUM_CTG -le 0 ]; then
