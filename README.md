@@ -6,7 +6,7 @@ The current pipeline has been designed to run on the SGE scheduling system and h
 
 To run the pipeline you need to:
 
-1. You must have a working java version (1.8+ recommended). Run javac *.java in the working folder
+1. You must have a working java version (1.8+ recommended). Run ```javac *.java``` in the working folder
 2. You must have a working installation of Pilon and symlink the jar file from wherever you have placed PilonGrid. You must also have a working bwa mem and samtools in your path.
 
 3. Create a mapping.fofn input file specifying which fastq files you want to use as input. They can be gzipped/bzipped. The pipeline assumes that paired-end reads are used with one file named \*\_R1\_\* and the other name \*\_R2\_\*. It will fail if this is not the case.
