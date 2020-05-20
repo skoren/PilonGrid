@@ -1,3 +1,7 @@
+# IMPORTANT: THIS PIPELINE IS DEPRECATED
+
+We recommend using the [VGP pipeline](https://github.com/VGP/vgp-assembly/tree/master/pipeline/freebayes-polish) based on FreeBayes instead of Pilon for polishing.
+
 # PilonGrid
 
 The distribution is a parallel wrapper around the [Pilon](https://github.com/broadinstitute/pilon) framework The pipeline is composed of bash scripts, an example mapping.fofn which shows how to input your fastq files (you give paths to the R1 file), and how to launch the pipeline. 
